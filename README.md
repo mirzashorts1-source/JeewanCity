@@ -603,46 +603,50 @@
 <script async="async" data-cfasync="false" src="https://pl28530705.effectivegatecpm.com/874c43096fa747b689598f7b44e92ba8/invoke.js"></script>
 <div id="container-874c43096fa747b689598f7b44e92ba8"></div>
 
+<div id="auto-widget-inject"></div>
+
 <script>
-    // Ye script khud hi widget ko sahi jagah (Nav ke niche) fit kar degi
     window.addEventListener('load', function() {
         const widgetHTML = `
-            <div id="live-updates-bar" style="background: #fff; margin: 10px 16px; border-radius: 12px; padding: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 4px solid #00a884; font-family: sans-serif;">
+            <div id="live-updates-bar" style="background: #fff; margin: 10px 16px; border-radius: 12px; padding: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 4px solid #e74c3c; font-family: sans-serif;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-weight: bold; font-size: 14px; color: #00a884;">🌤️ Live Jeewan City Updates</span>
-                    <span id="live-temp" style="font-size: 13px; font-weight: bold;">Loading...</span>
+                    <span style="font-weight: bold; font-size: 14px; color: #e74c3c;">📢 Latest: Sahiwal & Pakistan News</span>
+                    <span id="live-temp" style="font-size: 13px; font-weight: bold; color: #555;">Loading...</span>
                 </div>
-                <div style="background: #f0f2f5; border-radius: 8px; padding: 8px; overflow: hidden;">
-                    <marquee id="news-ticker" behavior="scroll" direction="left" style="font-size: 13px; color: #333;">
-                        Loading latest news from WAPDA & Pakistan...
+                <div style="background: #fff5f5; border-radius: 8px; padding: 8px; overflow: hidden; border: 1px solid #ffeaea;">
+                    <marquee id="news-ticker" behavior="scroll" direction="left" style="font-size: 13px; color: #333; font-weight: 500;">
+                        Petrol qeemat, Sahiwal news aur mulki halaat load ho rahe hain...
                     </marquee>
                 </div>
             </div>`;
         
-        // Nav bar ke baad widget ko insert karna
         const nav = document.querySelector('.nav');
-        if(nav) {
-            nav.insertAdjacentHTML('afterend', widgetHTML);
-        }
+        if(nav) { nav.insertAdjacentHTML('afterend', widgetHTML); }
 
-        // Mausam fetch karna
-        fetch('https://api.open-meteo.com/v1/forecast?latitude=30.04&longitude=72.35&current_weather=true')
+        // Weather for Sahiwal/Vehari area
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=30.66&longitude=73.10&current_weather=true')
             .then(res => res.json())
             .then(data => {
-                document.getElementById('live-temp').innerText = data.current_weather.temperature + "°C";
+                document.getElementById('live-temp').innerText = "🌡️ Sahiwal: " + data.current_weather.temperature + "°C";
             });
 
-        // Khabrein fetch karna (Wapda & Electricity)
-        fetch('https://newsdata.io/api/1/news?apikey=pub_6602069e2009ef0a48b3b64f33ca198642152&q=pakistan%20electricity&language=en,ur')
+        // Mix News: Sahiwal, Petrol, Pakistan
+        // Is mein humne keywords change kar diye hain
+        const apiKey = 'pub_6602069e2009ef0a48b3b64f33ca198642152';
+        const query = 'Sahiwal OR "Petrol Price" OR "Pakistan Gold" OR "Breaking News"';
+        
+        fetch(`https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent(query)}&language=en,ur&country=pk`)
             .then(res => res.json())
             .then(data => {
                 if(data.results && data.results.length > 0) {
-                    const headlines = data.results.map(n => " 🔥 " + n.title).join(" | ");
+                    const headlines = data.results.map(n => " ⭐ " + n.title).join(" | ");
                     document.getElementById('news-ticker').innerText = headlines;
+                } else {
+                    document.getElementById('news-ticker').innerText = "Petrol qeemat aur Sahiwal ki taza khabron ke liye jude rahein. Breaking News jald update hogi!";
                 }
             })
             .catch(() => {
-                document.getElementById('news-ticker').innerText = "Wapda News: Please check local subdivision for maintenance schedules.";
+                document.getElementById('news-ticker').innerText = "Khabrein: Petrol ki nayi qeemat aur mulki halaat jald yahan mulahiza karein.";
             });
     });
 </script>
