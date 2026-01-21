@@ -604,17 +604,16 @@
 <div id="container-874c43096fa747b689598f7b44e92ba8"></div>
 
 <script>
-    // Ye script khud hi widget ko sahi jagah (Nav ke niche) fit kar degi
     window.addEventListener('load', function() {
         const widgetHTML = `
-            <div id="live-updates-bar" style="background: #fff; margin: 10px 16px; border-radius: 12px; padding: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 4px solid #00a884; font-family: sans-serif;">
+            <div id="live-updates-bar" style="background: #fff; margin: 10px 16px; border-radius: 12px; padding: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border-left: 4px solid #007bff; font-family: sans-serif;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-weight: bold; font-size: 14px; color: #00a884;">🌤️ Live Jeewan City Updates</span>
-                    <span id="live-temp" style="font-size: 13px; font-weight: bold;">Loading...</span>
+                    <span style="font-weight: bold; font-size: 14px; color: #007bff;">🌤️ Live Jeewan City Updates</span>
+                    <span id="live-temp" style="font-size: 13px; font-weight: bold; color: #444;">Loading...</span>
                 </div>
-                <div style="background: #f0f2f5; border-radius: 8px; padding: 8px; overflow: hidden;">
-                    <marquee id="news-ticker" behavior="scroll" direction="left" style="font-size: 13px; color: #333;">
-                        Loading latest news from WAPDA & Pakistan...
+                <div style="background: #f0f7ff; border-radius: 8px; padding: 8px; overflow: hidden; border: 1px solid #d1e7ff;">
+                    <marquee id="news-ticker" behavior="scroll" direction="left" style="font-size: 13px; color: #004085; font-weight: 500;">
+                        Loading latest news from Sahiwal, Petrol Prices & Pakistan...
                     </marquee>
                 </div>
             </div>`;
