@@ -603,19 +603,18 @@
 <script async="async" data-cfasync="false" src="https://pl28530705.effectivegatecpm.com/874c43096fa747b689598f7b44e92ba8/invoke.js"></script>
 <div id="container-874c43096fa747b689598f7b44e92ba8"></div>
 
-<div id="auto-widget-inject"></div>
-
 <script>
+    // Ye script khud hi widget ko sahi jagah (Nav ke niche) fit kar degi
     window.addEventListener('load', function() {
         const widgetHTML = `
-            <div id="live-updates-bar" style="background: #fff; margin: 10px 16px; border-radius: 12px; padding: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 4px solid #e74c3c; font-family: sans-serif;">
+            <div id="live-updates-bar" style="background: #fff; margin: 10px 16px; border-radius: 12px; padding: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 4px solid #00a884; font-family: sans-serif;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-weight: bold; font-size: 14px; color: #e74c3c;">📢 Latest: Sahiwal & Pakistan News</span>
-                    <span id="live-temp" style="font-size: 13px; font-weight: bold; color: #555;">Loading...</span>
+                    <span style="font-weight: bold; font-size: 14px; color: #00a884;">🌤️ Live Jeewan City Updates</span>
+                    <span id="live-temp" style="font-size: 13px; font-weight: bold;">Loading...</span>
                 </div>
-                <div style="background: #fff5f5; border-radius: 8px; padding: 8px; overflow: hidden; border: 1px solid #ffeaea;">
-                    <marquee id="news-ticker" behavior="scroll" direction="left" style="font-size: 13px; color: #333; font-weight: 500;">
-                        Petrol qeemat, Sahiwal news aur mulki halaat load ho rahe hain...
+                <div style="background: #f0f2f5; border-radius: 8px; padding: 8px; overflow: hidden;">
+                    <marquee id="news-ticker" behavior="scroll" direction="left" style="font-size: 13px; color: #333;">
+                        Loading latest news from WAPDA & Pakistan...
                     </marquee>
                 </div>
             </div>`;
@@ -642,7 +641,7 @@
                     const headlines = data.results.map(n => " ⭐ " + n.title).join(" | ");
                     document.getElementById('news-ticker').innerText = headlines;
                 } else {
-                    document.getElementById('news-ticker').innerText = "Loding new news...!";
+                    document.getElementById('news-ticker').innerText = "Loding new news...";
                 }
             })
             .catch(() => {
