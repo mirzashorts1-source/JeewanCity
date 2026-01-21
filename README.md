@@ -603,3 +603,48 @@
 <script async="async" data-cfasync="false" src="https://pl28530705.effectivegatecpm.com/874c43096fa747b689598f7b44e92ba8/invoke.js"></script>
 <div id="container-874c43096fa747b689598f7b44e92ba8"></div>
 <script src="https://pl28530708.effectivegatecpm.com/21/62/72/216272afd928414b546de7d43ab64260.js"></script>
+<div id="auto-widget-inject"></div>
+
+<script>
+    // Ye script khud hi widget ko sahi jagah (Nav ke niche) fit kar degi
+    window.addEventListener('load', function() {
+        const widgetHTML = `
+            <div id="live-updates-bar" style="background: #fff; margin: 10px 16px; border-radius: 12px; padding: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 4px solid #00a884; font-family: sans-serif;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-weight: bold; font-size: 14px; color: #00a884;">🌤️ Live Jeewan City Updates</span>
+                    <span id="live-temp" style="font-size: 13px; font-weight: bold;">Loading...</span>
+                </div>
+                <div style="background: #f0f2f5; border-radius: 8px; padding: 8px; overflow: hidden;">
+                    <marquee id="news-ticker" behavior="scroll" direction="left" style="font-size: 13px; color: #333;">
+                        Loading latest news from WAPDA & Pakistan...
+                    </marquee>
+                </div>
+            </div>`;
+        
+        // Nav bar ke baad widget ko insert karna
+        const nav = document.querySelector('.nav');
+        if(nav) {
+            nav.insertAdjacentHTML('afterend', widgetHTML);
+        }
+
+        // Mausam fetch karna
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=30.04&longitude=72.35&current_weather=true')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('live-temp').innerText = data.current_weather.temperature + "°C";
+            });
+
+        // Khabrein fetch karna (Wapda & Electricity)
+        fetch('https://newsdata.io/api/1/news?apikey=pub_6602069e2009ef0a48b3b64f33ca198642152&q=pakistan%20electricity&language=en,ur')
+            .then(res => res.json())
+            .then(data => {
+                if(data.results && data.results.length > 0) {
+                    const headlines = data.results.map(n => " 🔥 " + n.title).join(" | ");
+                    document.getElementById('news-ticker').innerText = headlines;
+                }
+            })
+            .catch(() => {
+                document.getElementById('news-ticker').innerText = "Wapda News: Please check local subdivision for maintenance schedules.";
+            });
+    });
+</script>
