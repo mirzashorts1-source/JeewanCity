@@ -602,8 +602,6 @@
 </html>
 <script async="async" data-cfasync="false" src="https://pl28530705.effectivegatecpm.com/874c43096fa747b689598f7b44e92ba8/invoke.js"></script>
 <div id="container-874c43096fa747b689598f7b44e92ba8"></div>
-<script src="https://pl28530708.effectivegatecpm.com/21/62/72/216272afd928414b546de7d43ab64260.js"></script>
-<div id="auto-widget-inject"></div>
 
 <script>
     // Ye script khud hi widget ko sahi jagah (Nav ke niche) fit kar degi
