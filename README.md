@@ -642,7 +642,7 @@
                     const headlines = data.results.map(n => " ⭐ " + n.title).join(" | ");
                     document.getElementById('news-ticker').innerText = headlines;
                 } else {
-                    document.getElementById('news-ticker').innerText = "Petrol qeemat aur Sahiwal ki taza khabron ke liye jude rahein. Breaking News jald update hogi!";
+                    document.getElementById('news-ticker').innerText = "Loding new news...!";
                 }
             })
             .catch(() => {
