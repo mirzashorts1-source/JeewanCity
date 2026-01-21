@@ -641,7 +641,7 @@
                     const headlines = data.results.map(n => " ⭐ " + n.title).join(" | ");
                     document.getElementById('news-ticker').innerText = headlines;
                 } else {
-                    document.getElementById('news-ticker').innerText = "Loding new news...";
+                    document.getElementById('news-ticker').innerText = "Loading new news...";
                 }
             })
             .catch(() => {
