@@ -1,5 +1,6 @@
 <html lang="en">
-<head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2657067984046315"
+<head><div class="ad-container">
+    </div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2657067984046315"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -599,3 +600,6 @@
     </script>
 </body>
 </html>
+<script async="async" data-cfasync="false" src="https://pl28530705.effectivegatecpm.com/874c43096fa747b689598f7b44e92ba8/invoke.js"></script>
+<div id="container-874c43096fa747b689598f7b44e92ba8"></div>
+<script src="https://pl28530708.effectivegatecpm.com/21/62/72/216272afd928414b546de7d43ab64260.js"></script>
