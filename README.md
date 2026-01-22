@@ -666,7 +666,7 @@
         // Weather
         fetch('https://api.open-meteo.com/v1/forecast?latitude=30.66&longitude=73.10&current_weather=true')
             .then(res => res.json()).then(data => {
-                document.getElementById('live-temp').innerText = data.current_weather.temperature + "°C";
+                document.getElementById('live-temp').innerText ="🌡️ Sahiwal: " + data.current_weather.temperature + "°C";
             });
 
         fetchExternalNews();
