@@ -600,50 +600,73 @@
     </script>
 </body>
 </html>
-<script async="async" data-cfasync="false" src="https://pl28530705.effectivegatecpm.com/874c43096fa747b689598f7b44e92ba8/invoke.js"></script>
-<div id="container-874c43096fa747b689598f7b44e92ba8"></div>
 <script>
+    // 1. Function: Auto News + Ads Logic
+    async function fetchExternalNews() {
+        const apiKey = 'pub_6602069e2009ef0a48b3b64f33ca198642152';
+        const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=pakistan%20petrol%20gold%20price&language=ur,en&country=pk`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            const container = document.getElementById('posts-container');
+
+            if(container && data.results) {
+                data.results.forEach((article, index) => {
+                    if (index > 0 && index % 2 === 0) {
+                        container.insertAdjacentHTML('beforeend', `
+                            <div style="text-align:center; margin:10px 0; background:#f9f9f9; padding:5px; border-radius:8px;">
+                                <small style="color:#999; display:block;">Advertisement</small>
+                                <div id="ad-slot-${index}"></div> 
+                            </div>
+                        `);
+                    }
+
+                    const postHTML = `
+                        <div class="post-card" style="border: 1px solid #eee; margin: 10px; border-radius: 10px; overflow: hidden; background: #fff; display: flex; align-items: center; padding: 8px;">
+                            ${article.image_url ? `<img src="${article.image_url}" style="width:70px; height:70px; object-fit:cover; border-radius:8px;">` : ''}
+                            <div style="padding-left: 10px; flex: 1;">
+                                <h3 style="font-size: 14px; margin: 0; color: #222; line-height: 1.3;">${article.title.substring(0, 60)}...</h3>
+                                <a href="${article.link}" target="_blank" style="color: #007bff; text-decoration: none; font-size: 11px; font-weight: bold;">Puri Khabar →</a>
+                            </div>
+                        </div>`;
+                    container.insertAdjacentHTML('beforeend', postHTML);
+                });
+            }
+        } catch (error) { console.log("News error"); }
+    }
+
+    // 2. Main Page Load
     window.addEventListener('load', function() {
+        // Scrollable Widget Design
         const widgetHTML = `
-            <div id="live-updates-bar" style="background: #fff; margin: 10px 16px; border-radius: 12px; padding: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border-left: 4px solid #007bff; font-family: sans-serif;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-weight: bold; font-size: 14px; color: #007bff;">🌤️ Live Jeewan City Updates</span>
-                    <span id="live-temp" style="font-size: 13px; font-weight: bold; color: #444;">Loading...</span>
+            <div id="live-updates-bar" style="background: #fff; margin: 8px 12px; border-radius: 10px; padding: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #007bff; font-family: sans-serif;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-weight: bold; font-size: 12px; color: #007bff;">🌤️ Live Rates (Swipe to View)</span>
+                    <span id="live-temp" style="font-size: 12px; font-weight: bold; color: #444;">🌡️ --°C</span>
                 </div>
-                <div style="background: #f0f7ff; border-radius: 8px; padding: 8px; overflow: hidden; border: 1px solid #d1e7ff;">
-                    <marquee id="news-ticker" behavior="scroll" direction="left" style="font-size: 13px; color: #004085; font-weight: 500;">
-                        Loading latest news from Sahiwal, Petrol Prices & Pakistan...
-                    </marquee>
+                <div style="overflow-x: auto; white-space: nowrap; padding-bottom: 5px; -webkit-overflow-scrolling: touch;">
+                    <div id="scroll-content" style="display: inline-block; font-size: 13px; color: #333;">
+                        <span style="background:#f0f7ff; padding:4px 10px; border-radius:15px; margin-right:8px; border:1px solid #d1e7ff;">⛽ Petrol: Rs. 260.96</span>
+                        <span style="background:#fff9e6; padding:4px 10px; border-radius:15px; margin-right:8px; border:1px solid #ffeeba;">🟡 Gold: Rs. 280,400</span>
+                        <span style="background:#fff5f5; padding:4px 10px; border-radius:15px; margin-right:8px; border:1px solid #ffe3e3;">💵 Dollar: Rs. 278.50</span>
+                        <span style="background:#f2fff2; padding:4px 10px; border-radius:15px; margin-right:8px; border:1px solid #d4edda;">⚡ WAPDA: Normal</span>
+                        <span style="background:#f9f0ff; padding:4px 10px; border-radius:15px; margin-right:8px; border:1px solid #ebdaff;">🏠 Jeewan City News</span>
+                        
+                    </div>
                 </div>
             </div>`;
         
-        const nav = document.querySelector('.nav');
-        if(nav) { nav.insertAdjacentHTML('afterend', widgetHTML); }
+        const nav = document.querySelector('.nav') || document.body;
+        if(nav === document.body) { document.body.prepend(document.createElement('div')).innerHTML = widgetHTML; } 
+        else { nav.insertAdjacentHTML('afterend', widgetHTML); }
 
-        // Weather for Sahiwal/Vehari area
+        // Weather
         fetch('https://api.open-meteo.com/v1/forecast?latitude=30.66&longitude=73.10&current_weather=true')
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('live-temp').innerText = "🌡️ Sahiwal: " + data.current_weather.temperature + "°C";
+            .then(res => res.json()).then(data => {
+                document.getElementById('live-temp').innerText = data.current_weather.temperature + "°C";
             });
 
-        // Mix News: Sahiwal, Petrol, Pakistan
-        // Is mein humne keywords change kar diye hain
-        const apiKey = 'pub_6602069e2009ef0a48b3b64f33ca198642152';
-        const query = 'Sahiwal OR "Petrol Price" OR "Pakistan Gold" OR "Breaking News"';
-        
-        fetch(`https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent(query)}&language=en,ur&country=pk`)
-            .then(res => res.json())
-            .then(data => {
-                if(data.results && data.results.length > 0) {
-                    const headlines = data.results.map(n => " ⭐ " + n.title).join(" | ");
-                    document.getElementById('news-ticker').innerText = headlines;
-                } else {
-                    document.getElementById('news-ticker').innerText = "Loading new news...";
-                }
-            })
-            .catch(() => {
-                document.getElementById('news-ticker').innerText = "Khabrein: Petrol ki nayi qeemat aur mulki halaat jald yahan mulahiza karein.";
-            });
+        fetchExternalNews();
     });
 </script>
