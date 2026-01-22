@@ -600,6 +600,8 @@
     </script>
 </body>
 </html>
+<script async="async" data-cfasync="false" src="https://pl28530705.effectivegatecpm.com/874c43096fa747b689598f7b44e92ba8/invoke.js"></script>
+<div id="container-874c43096fa747b689598f7b44e92ba8"></div>
 <script>
     // 1. Function: Auto News + Ads Logic
     async function fetchExternalNews() {
