@@ -1,5 +1,5 @@
 <html lang="en">
-<head><div class="ad-container">
+<head><meta name="google-site-verification" content="rnkBo3HWEAoWAY2Kd7ulMzUnYhRRbMQS3uxIEF-pNeI" /><div class="ad-container">
     </div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2657067984046315"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
